@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,58 +7,39 @@
     android:background="@color/back_color"
     tools:context=".activities.MainActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/TIL_prompt"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        android:padding="5dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <!-- text view for displaying question-->
-            <TextView
-                android:id="@+id/idTVQuestion"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
-                android:padding="4dp"
-                android:text="Question"
-                android:textColor="@color/white"
-                android:textSize="17sp" />
-
-            <!-- text view for displaying response-->
-            <TextView
-                android:id="@+id/answer_text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:padding="4dp"
-                android:text="Response"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
-        </LinearLayout>
-
-    </ScrollView>
     <!-- text field for asking question-->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TIL_prompt"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+    <!-- <TextView
+        android:id="@+id/error_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:text="error here"
+        />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recycler_view_chat"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="0dp"
+        android:padding="5dp"
+        android:focusable="true"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TIL_prompt"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_margin="5dp"
         android:hint="Make a statement"
+        android:background="@color/back_color"
         android:padding="5dp"
         android:textColorHint="@color/white"
-        app:hintTextColor="@color/white">
+        app:hintTextColor="@color/white"
+
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_prompt"
@@ -66,13 +47,13 @@
             android:layout_height="match_parent"
             android:background="@color/et_back_color"
             android:drawableEnd="@drawable/ic_send"
-            android:drawableTint="@color/white"
             android:ems="10"
+            android:padding="10dp"
             android:imeOptions="actionSend"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:textSize="14sp" />
+            android:textSize="25sp" />
     </com.google.android.material.textfield.TextInputLayout>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

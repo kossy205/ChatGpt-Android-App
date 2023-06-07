@@ -13,11 +13,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ServiceBuilder {
 
     const val BASE_URL: String = "https://api.openai.com/v1/"
-    const val API_KEY: String = "Bearer <your api key>"
+    const val API_KEY: String = "Bearer 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"
 
-    //private val gson: Gson = GsonBuilder()
-      //  .setLenient()
-        //.create()
+
     private val okHttp: OkHttpClient.Builder = OkHttpClient.Builder()
 
     private val builder: Retrofit.Builder = Retrofit.Builder()

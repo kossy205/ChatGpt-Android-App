@@ -8,7 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="back_color">#3d3b4a</color>
+    <color name="back_color">#343541</color>
     <color name="et_back_color">#4a495a</color>
+    <color name="chatgpt_tv">#444654</color>
+    <color name="user_tv">#343541</color>
 
 </resources>
