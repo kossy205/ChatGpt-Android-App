@@ -53,6 +53,4 @@ class MessageAdapter(private val messageList: ArrayList<Message>):
             else -> 1
         }
     }
-
-
 }
