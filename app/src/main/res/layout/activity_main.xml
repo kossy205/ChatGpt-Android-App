@@ -1,53 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:id="@+id/drawer_layout_main"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
     android:layout_height="match_parent"
-    android:background="@color/back_color"
-    tools:context=".activities.MainActivity">
+    android:layout_width="match_parent">
 
-    <!-- text field for asking question-->
-    <!-- <TextView
-        android:id="@+id/error_text"
+    <include
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:textColor="@color/white"
-        android:text="error here"
-        />-->
+        android:layout_height="match_parent"
+        />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_chat"
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/TIL_prompt"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer"
+        />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TIL_prompt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:hint="Make a statement"
-        android:background="@color/back_color"
-        android:textColorHint="@color/white"
-        app:hintTextColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent">
+</androidx.drawerlayout.widget.DrawerLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_prompt"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/et_back_color"
-            android:drawableEnd="@drawable/ic_send"
-            android:ems="10"
-            android:padding="10dp"
-            android:imeOptions="actionSend"
-            android:importantForAutofill="no"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="25sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>

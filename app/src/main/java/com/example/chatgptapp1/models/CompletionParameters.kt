@@ -4,6 +4,7 @@ import java.io.Serializable
 
 data class CompletionParameters(
     val model: String,
+    //val messages: ArrayList<Message>,
     val prompt: String,
     val max_tokens: Int,
     val temperature: Double,

@@ -1,5 +1,6 @@
 package com.example.chatgptapp1
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.chatgptapp1.models.Message
 import java.util.ArrayList
 
-class MessageAdapter(private val messageList: ArrayList<Message>):
+    class MessageAdapter(private val context: Context, private val messageList: ArrayList<Message>):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class UserMessageViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -23,10 +24,10 @@ class MessageAdapter(private val messageList: ArrayList<Message>):
         val view: View
 
         return if (viewType ==0){
-            view = LayoutInflater.from(parent.context).inflate(R.layout.rv_user_item,parent,false)
+            view = LayoutInflater.from(context).inflate(R.layout.rv_user_item,parent,false)
             UserMessageViewHolder(view)
         }else{
-            view = LayoutInflater.from(parent.context).inflate(R.layout.rv_bot_item,parent,false)
+            view = LayoutInflater.from(context).inflate(R.layout.rv_bot_item,parent,false)
             BotMessageViewHolder(view)
         }
     }
