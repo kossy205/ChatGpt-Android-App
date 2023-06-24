@@ -4,22 +4,25 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.chatgptapp1.models.Message
+import androidx.room.TypeConverters
+import com.example.chatgptapp1.models.Chat
+import com.example.chatgptapp1.models.TypeConverter
 
+@Database(entities = [Chat::class], version = 1)
+@TypeConverters(TypeConverter::class) // Add this line
 
-@Database(entities = [Message::class], version = 1)
-abstract class MessageDatabase: RoomDatabase() {
+abstract class ChatDataBase: RoomDatabase() {
 
     //connects database to our dao
-    abstract fun messageDao(): MessageDao
+    abstract fun chatsDao(): ChatsDao
 
     companion object {
 
         @Volatile
-        private var INSTANCE: MessageDatabase? = null
+        private var INSTANCE: ChatDataBase? = null
 
 
-        fun getInstance(context: Context): MessageDatabase {
+        fun getInstance(context: Context): ChatDataBase {
             // Multiple threads can ask for the database at the same time, ensure we only initialize
             // it once by using synchronized. Only one thread may enter a synchronized block at a
             // time.
@@ -33,8 +36,8 @@ abstract class MessageDatabase: RoomDatabase() {
                 if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
-                        MessageDatabase::class.java,
-                        "message_database"
+                        ChatDataBase::class.java,
+                        "chat_database"
                     )
                         // Wipes and rebuilds instead of migrating if no Migration object.
                         // Migration is not part of this lesson. You can learn more about

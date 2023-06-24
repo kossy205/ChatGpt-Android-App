@@ -2,8 +2,8 @@ package com.example.chatgptapp1
 
 import android.app.Application
 
-class MessageApp(): Application() {
+class ChatApp(): Application() {
     val db by lazy {
-        MessageDatabase.getInstance(this)
+        ChatDataBase.getInstance(this)
     }
 }

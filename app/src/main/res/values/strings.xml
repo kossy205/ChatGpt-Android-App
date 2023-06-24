@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">ChatGptApp1</string>
+
+    <string name="sign_in_description_text">Enter your phone number so I can sign you in.</string>
+    <string name="sign_up_description_text">Enter your name, email and phone number, so I can register you and then you can start using port.</string>
 </resources>
