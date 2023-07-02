@@ -9,14 +9,17 @@ import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object ServiceBuilder {
 
-    const val BASE_URL: String = "https://api.openai.com/v1/"
-    const val API_KEY: String = "Bearer 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"
+    private const val BASE_URL: String = "https://api.openai.com/v1/"
+    const val API_KEY: String = "Bearer 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"
 
 
     private val okHttp: OkHttpClient.Builder = OkHttpClient.Builder()
+        .connectTimeout(30, TimeUnit.SECONDS) // Increase the connection timeout
+        .readTimeout(30, TimeUnit.SECONDS)
 
     private val builder: Retrofit.Builder = Retrofit.Builder()
         .baseUrl(BASE_URL)

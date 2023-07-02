@@ -35,6 +35,8 @@
             android:textColor="@color/white"
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="2dp"
+            android:singleLine="true"
+            android:ellipsize="end"
             />
 
     </LinearLayout>

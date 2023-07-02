@@ -2,35 +2,34 @@ package com.example.chatgptapp1.models
 
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 
 //@Entity(tableName = "message-table")
 data class Message(
 
     //@PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
+    //var id: Int = 0,
 
-    var userId: String? = null,
+    //var userId: String? = null,
 
-    var message: String? = null,
+    // this role means "sendBy"
+    var role: String? = null,
 
-    var sender: String? = null
+    var content: String? = null
+
 ): Parcelable{
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
-        parcel.readString()!!,
+        //parcel.readInt(),
+        //parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(id)
-        parcel.writeString(userId)
-        parcel.writeString(message)
-        parcel.writeString(sender)
+        //parcel.writeInt(id)
+        //parcel.writeString(userId)
+        parcel.writeString(content)
+        parcel.writeString(role)
     }
 
     override fun describeContents(): Int {
