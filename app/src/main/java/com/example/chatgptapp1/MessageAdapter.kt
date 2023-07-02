@@ -38,19 +38,19 @@ import java.util.ArrayList
 
     // used to set the data for a specific view, eg the text of a textview to display
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val sender = messageList[position].sender
+        val sender = messageList[position].role
         when (sender){
-            "user" -> (holder as UserMessageViewHolder).userMsgTv.text = messageList[position].message
+            "user" -> (holder as UserMessageViewHolder).userMsgTv.text = messageList[position].content
 
-            "bot" -> (holder as BotMessageViewHolder).botMsgTv.text = messageList[position].message
+            "assistant" -> (holder as BotMessageViewHolder).botMsgTv.text = messageList[position].content
         }
     }
 
 
     override fun getItemViewType(position: Int): Int {
-        return when (messageList[position].sender){
+        return when (messageList[position].role){
             "user" -> 0
-            "bot" -> 1
+            "assistant" -> 1
             else -> 1
         }
     }

@@ -62,6 +62,7 @@ class FirebaseClass {
 
     fun getChatList(activity: Activity){
         mFirestore.collection(Constants.CHAT)
+            .orderBy(Constants.TIMESTAMP, Query.Direction.ASCENDING)
             .whereEqualTo(Constants.USER_ID, getCurrentUid())
             .get()
             .addOnSuccessListener {querySnapshot ->
@@ -99,7 +100,7 @@ class FirebaseClass {
                 }
 
                 //activity.hideProgressDialog()
-                Log.i(activity.javaClass.simpleName, "Error while creating a board.", e)
+                Log.i(activity.javaClass.simpleName, "Error while getting chatList.", e)
             }
     }
 
@@ -130,11 +131,11 @@ class FirebaseClass {
      * ...that is why this function was created to get newly created chatDetails
      *
      * A function to get chat details using the id of the chat clicked
-     *
      */
-    fun getChatDetailsForNewChat(activity: MainActivity, documentId: String){
+
+    fun getChatDetailsForNewChat_latest_chatDocumentId(activity: Activity, callback: (String) -> Unit){
         mFirestore.collection(Constants.CHAT)
-            .orderBy(Constants.TIMESTAMP, Query.Direction.DESCENDING) // Assuming 'timestamp' field stores the creation time
+            .orderBy(Constants.TIMESTAMP, Query.Direction.DESCENDING)
             .limit(1)
             .get()
             .addOnSuccessListener { querySnapshot ->
@@ -142,13 +143,28 @@ class FirebaseClass {
                     val latestChatDocument = querySnapshot.documents[0]
                     val latestChatDocumentId = latestChatDocument.id
                     // Do something with the latestChatDocumentId
-                    activity.getNewChatLatestId(latestChatDocumentId)
+                    upDateChatDocumentId(latestChatDocumentId, latestChatDocumentId)
+                    if(activity is MainActivity){
+                        activity.getNewChatLatestId(latestChatDocumentId)
+                    }
+                    if(activity is ChatActivity){
+                        //activity.getNewChatLatestId(latestChatDocumentId)
+                    }
+
+                    Log.i("latestChatDocumentId", "$latestChatDocumentId")
+                    callback(latestChatDocumentId)
                 } else {
-                    activity.chatDocumentIsEmpty()
+                    if(activity is MainActivity){
+                        activity.chatDocumentIsEmpty()
+                    }
                     //Toast.makeText(MainActivity, "document is empty")
                 }
             }
+            .addOnFailureListener {
+
+            }
     }
+
 
 
     /**
@@ -168,7 +184,7 @@ class FirebaseClass {
                 //activity.addMessageListSuccess()
             }
             .addOnFailureListener {e ->
-                Log.e(activity.javaClass.simpleName, "Error while creating a board.", e)
+                Log.e(activity.javaClass.simpleName, "Error while creating a updating message list.", e)
             }
 
     }
@@ -187,6 +203,26 @@ class FirebaseClass {
             .addOnSuccessListener {
 
                 //activity.updataChatTitleSuccess()
+
+            }
+            .addOnFailureListener {e ->
+
+            }
+
+    }
+
+    fun upDateChatTitleNewChat(activity: MainActivity, chatTitle: String, documentId: String){
+
+        val chatTitleTxt = hashMapOf<String, Any>(
+            Constants.CHAT_TITLE to chatTitle
+        )
+
+        mFirestore.collection(Constants.CHAT)
+            .document(documentId)
+            .update(chatTitleTxt)
+            .addOnSuccessListener {
+                Log.i("updateChatTitleSuccess", "$chatTitle")
+                //activity.updateChatTitleSuccess()
 
             }
             .addOnFailureListener {e ->
@@ -214,11 +250,33 @@ class FirebaseClass {
             .document(documentId)
             .update(taskListHashMap)
             .addOnSuccessListener {
-                Log.e(activity.javaClass.simpleName, "MessageList updated successfully.")
+                Log.e(activity.javaClass.simpleName, "(New Chat)MessageList updated successfully.")
+                Log.i("newCChatId", "$documentId")
                 //activity.addMessageListSuccess()
             }
             .addOnFailureListener {e ->
-                Log.e(activity.javaClass.simpleName, "Error while creating a board.", e)
+                Log.e(activity.javaClass.simpleName, "Error while creating a (New Chat)MessageList.", e)
+            }
+
+    }
+
+    fun upDateChatDocumentId(chatDocumentId: String, documentId: String){
+
+        val chatDocumentIdd = hashMapOf<String, Any>(
+            Constants.DOCUMENT_ID to chatDocumentId
+        )
+
+        mFirestore.collection(Constants.CHAT)
+            .document(documentId)
+            .update(chatDocumentIdd)
+            .addOnSuccessListener {
+                Log.i("updateChatTitleSuccess", "$chatDocumentId")
+                Log.i("documentIdSuccess", "$documentId")
+                //activity.updateChatTitleSuccess()
+
+            }
+            .addOnFailureListener {e ->
+
             }
 
     }

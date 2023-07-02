@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -50,8 +51,13 @@ class ChatActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        FirebaseClass().getChatList(this)
+    }
+
     private fun createChat(){
-        val chatTitle = "new created chat title"
+        val chatTitle = Constants.NEWLY_CREATED_CHAT
         val userId = FirebaseClass().getCurrentUid()
         val messageList: ArrayList<Message> = ArrayList()
         val timestamp = Calendar.getInstance().time
@@ -59,15 +65,15 @@ class ChatActivity : AppCompatActivity() {
         val chat = Chat(
             localDbId = 0,
             userId = userId,
-            //chatTitleTxt = chatTitle,
+            chatTitleTxt = chatTitle,
             messageList = messageList,
             chatOwner = userId,
             timestamp = timestamp
         )
-        val intent = Intent(this@ChatActivity, MainActivity::class.java)
+        //val intent = Intent(this@ChatActivity, MainActivity::class.java)
         //intent.putExtra(Constants.NAME, mUserName)
-        intent.putExtra(Constants.DOCUMENT_ID, chat.chatDocumentId)
-        startActivity(intent)
+        //intent.putExtra(Constants.DOCUMENT_ID, chat.chatDocumentId)
+        //startActivity(intent)
         FirebaseClass().createChat(this, chat)
     }
 
@@ -75,7 +81,7 @@ class ChatActivity : AppCompatActivity() {
 
     fun populateChatsOnRV(chatList: ArrayList<Chat>){
 
-        rvChats?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvChats?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
         chatAdapter = ChatAdapter(this, chatList)
         rvChats?.adapter = chatAdapter
         rvChats?.scrollToPosition(chatAdapter!!.itemCount - 1)
@@ -91,13 +97,29 @@ class ChatActivity : AppCompatActivity() {
 
     }
 
-    fun chatCreatedSuccessfully() {
 
+    fun chatCreatedSuccessfully(){
+
+        FirebaseClass()
+            .getChatDetailsForNewChat_latest_chatDocumentId(this@ChatActivity){latestChatId ->
+
+                val intent = Intent(this@ChatActivity, MainActivity::class.java)
+                intent.putExtra(Constants.NEW_CHAT_DOCUMENT_ID, latestChatId)
+                startActivity(intent)
+        }
         //hideProgressDialog()
 
         setResult(Activity.RESULT_OK)
-        finish()
     }
+
+    /**fun getNewChatLatestId(newId: String){
+        newChatId = newId
+        //return newChatId
+        Log.i("3newChatId", "$newChatId")
+
+        //FirebaseClass().getChatDetails(this@MainActivity, newChatId)
+        //FirebaseClass().upDateChatDocumentId(this@MainActivity, newChatId)
+    }*/
 
     /**fun showProgressDialog(text: String) {
         mProgressDialog = Dialog(this)
