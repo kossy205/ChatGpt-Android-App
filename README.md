@@ -1,3 +1,5 @@
+https://github.com/user-attachments/assets/57411f2e-94c7-484f-a43c-c94459457fb4
+
 # ChatGpt-Android-App
 Mobile ChatGPT clone, built before OpenAi launched thier android application.
 An android app driven by AI technology that attempts to imitate human text and can provide answers to questions from a wide variety of topics. Uses retrofit to interact with the openai api with android Kotlin.
@@ -20,13 +22,6 @@ An android app driven by AI technology that attempts to imitate human text and c
 - Chat with an AI like you are chatting with a human.
 
 - ChatGPT mobile experience
-
-
-
-
-https://github.com/user-attachments/assets/57411f2e-94c7-484f-a43c-c94459457fb4
-
-
 
 
 
