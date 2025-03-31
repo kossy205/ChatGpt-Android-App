@@ -14,7 +14,7 @@ An android app driven by AI technology that attempts to imitate human text and c
 
 - Firebase Auth: Implemented phone number verification with firebase Auth
 
-- ViewBinding which also improves the apps performance and made interactions with UI safer.
+- ViewBinding which also improves the apps performance and makes interactions with UI safer.
 
 
 ## Features
