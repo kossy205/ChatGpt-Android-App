@@ -24,3 +24,10 @@ An android app driven by AI technology that attempts to imitate human text and c
 
 
 
+https://github.com/user-attachments/assets/57411f2e-94c7-484f-a43c-c94459457fb4
+
+
+
+
+
+
